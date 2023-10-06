@@ -1,7 +1,6 @@
-import React from "preact";
-import { DynamicInputProps } from "@/components/notebook/page/DynamicInput";
-import NoteEditor from "@/components/notebook/page/NoteEditor";
-import NotebookHeaderActions from "@/components/notebook/page/NotebookHeaderActions";
+import { DynamicInputProps } from "src/components/notebook/page/DynamicInput";
+import NoteEditor from "src/components/notebook/page/NoteEditor";
+import NotebookHeaderActions from "src/components/notebook/page/NotebookHeaderActions";
 import { BookmarkIcon } from "@heroicons/react/24/outline";
 
 const dummy: DynamicInputProps[] = [

@@ -1,8 +1,8 @@
-import { RecapCardProps } from "@/components/recap/RecapCard";
-import NotebooksCardsContainer from "@/components/notebook/NotebooksCardsContainer";
-import { NotebookCardsProps } from "@/components/notebook/NotebookCards";
-import UserGreeting from "@/components/home/UserGreeting";
-import RecapCardsContainer from "@/components/recap/RecapCardsContainer";
+import { RecapCardProps } from "src/components/recap/RecapCard";
+import NotebooksCardsContainer from "src/components/notebook/NotebooksCardsContainer";
+import { NotebookCardsProps } from "src/components/notebook/NotebookCards";
+import UserGreeting from "src/components/home/UserGreeting";
+import RecapCardsContainer from "src/components/recap/RecapCardsContainer";
 
 const fakeData: NotebookCardsProps[] = [
   {

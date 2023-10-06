@@ -1,13 +1,11 @@
-"use client";
-import Link from "next/link";
-import React, { FC, useState } from "react";
+import React, { FC, useState, SVGProps } from "react";
+import { Link } from "wouter";
 import SidebarToggle from "./SidebarToggle";
 import Logo from "./Logo";
 import {
   BookmarkIcon,
   Cog8ToothIcon,
   MagnifyingGlassIcon,
-  NewspaperIcon,
   PlusIcon,
 } from "@heroicons/react/24/outline";
 
@@ -60,7 +58,7 @@ export const Sidebar = () => {
 };
 
 const SidebarLink: FC<{
-  icon: React.FC<any>;
+  icon: React.FC<Omit<SVGProps<SVGSVGElement>, "ref">>;
   title: string;
   href: string;
 }> = ({ icon: Icon, title, href }) => {
@@ -75,14 +73,14 @@ const SidebarLink: FC<{
 };
 
 const SidebarEntry: FC<{
-  icon: React.FC<any>;
+  icon: React.FC<Omit<SVGProps<SVGSVGElement>, "ref">>;
   title: string;
   onClick?: () => void;
 }> = ({ icon: Icon, title, onClick = () => alert("Function not mapped") }) => {
   return (
     <li
       className="flex items-center gap-1 text-sm cursor-pointer"
-      // onClick={onClick}
+      onClick={onClick}
     >
       <Icon width={17} />
       <p>{title}</p>

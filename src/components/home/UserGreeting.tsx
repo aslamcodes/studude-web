@@ -1,5 +1,3 @@
-import React from "react";
-
 const UserGreeting = () => {
   return (
     <p className="text-5xl font-bold mb-8">
