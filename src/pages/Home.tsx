@@ -3,8 +3,7 @@ import NotebooksCardsContainer from "src/components/notebook/NotebooksCardsConta
 import { NotebookCardsProps } from "src/components/notebook/NotebookCards";
 import UserGreeting from "src/components/home/UserGreeting";
 import RecapCardsContainer from "src/components/recap/RecapCardsContainer";
-import useSWR from "swr";
-import { fetcher } from "src/utils";
+import { Sidebar } from "src/components/common/Sidebar";
 const fakeData: NotebookCardsProps[] = [
   {
     notebookId: "1",
@@ -82,13 +81,9 @@ const fakeRecapData: RecapCardProps[] = [
 ];
 
 export default function Home() {
-  const { data, error } = useSWR<NotebookCardsProps[]>(
-    "/api/get-user-notebook",
-    fetcher
-  );
-
   return (
     <section className="flex flex-col gap-6 mx-28 mt-28">
+      <Sidebar />
       <UserGreeting />
       <RecapCardsContainer recaps={fakeRecapData} />
       <NotebooksCardsContainer notebooks={fakeData} />

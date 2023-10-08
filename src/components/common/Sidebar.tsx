@@ -1,7 +1,7 @@
 import React, { FC, useState, SVGProps } from "react";
-import { Link } from "wouter";
 import SidebarToggle from "./SidebarToggle";
 import Logo from "./Logo";
+import { Link } from "react-router-dom";
 import {
   BookmarkIcon,
   Cog8ToothIcon,
@@ -64,7 +64,7 @@ const SidebarLink: FC<{
 }> = ({ icon: Icon, title, href }) => {
   return (
     <li>
-      <Link href={href} className="flex items-center gap-1 text-sm">
+      <Link to={href} className="flex items-center gap-1 text-sm">
         <Icon width={17} />
         <p>{title}</p>
       </Link>
