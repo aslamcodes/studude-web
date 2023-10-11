@@ -1,51 +1,52 @@
 import { RecapCardProps } from "src/components/recap/RecapCard";
 import NotebooksCardsContainer from "src/components/notebook/NotebooksCardsContainer";
-import { NotebookCardsProps } from "src/components/notebook/NotebookCards";
 import UserGreeting from "src/components/home/UserGreeting";
 import RecapCardsContainer from "src/components/recap/RecapCardsContainer";
 import { Sidebar } from "src/components/common/Sidebar";
-const fakeData: NotebookCardsProps[] = [
-  {
-    notebookId: "1",
-    pageCards: [
-      {
-        pageId: "1",
-        contentPeek: [
-          "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Error distinctio ex necessitatibus officia non assumenda molestiae, magni eius. Sed ullam autem animi officia vitae omnis, eligendi fugiat possimus cupiditate laudantium.",
-        ],
-        title: "Random Page in it",
-      },
-    ],
-    title: "Random Note",
-  },
-  {
-    notebookId: "2",
-    pageCards: [
-      {
-        pageId: "1",
-        contentPeek: [
-          "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Error distinctio ex necessitatibus officia non assumenda molestiae, magni eius. Sed ullam autem animi officia vitae omnis, eligendi fugiat possimus cupiditate laudantium.",
-        ],
-        title: "Random Page in it",
-      },
-      {
-        pageId: "2",
-        contentPeek: [
-          "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Error distinctio ex necessitatibus officia non assumenda molestiae, magni eius. Sed ullam autem animi officia vitae omnis, eligendi fugiat possimus cupiditate laudantium.",
-        ],
-        title: "Random Page in it",
-      },
-      {
-        pageId: "3",
-        contentPeek: [
-          "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Error distinctio ex necessitatibus officia non assumenda molestiae, magni eius. Sed ullam autem animi officia vitae omnis, eligendi fugiat possimus cupiditate laudantium.",
-        ],
-        title: "Random Page in it",
-      },
-    ],
-    title: "Random Note",
-  },
-];
+import { useGetNotebookForUserQuery } from "src/slices/notebookApiSlice";
+
+// const fakeData: NotebookCardsProps[] = [
+//   {
+//     notebookId: "1",
+//     pageCards: [
+//       {
+//         pageId: "1",
+//         contentPeek: [
+//           "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Error distinctio ex necessitatibus officia non assumenda molestiae, magni eius. Sed ullam autem animi officia vitae omnis, eligendi fugiat possimus cupiditate laudantium.",
+//         ],
+//         title: "Random Page in it",
+//       },
+//     ],
+//     title: "Random Note",
+//   },
+//   {
+//     notebookId: "2",
+//     pageCards: [
+//       {
+//         pageId: "1",
+//         contentPeek: [
+//           "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Error distinctio ex necessitatibus officia non assumenda molestiae, magni eius. Sed ullam autem animi officia vitae omnis, eligendi fugiat possimus cupiditate laudantium.",
+//         ],
+//         title: "Random Page in it",
+//       },
+//       {
+//         pageId: "2",
+//         contentPeek: [
+//           "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Error distinctio ex necessitatibus officia non assumenda molestiae, magni eius. Sed ullam autem animi officia vitae omnis, eligendi fugiat possimus cupiditate laudantium.",
+//         ],
+//         title: "Random Page in it",
+//       },
+//       {
+//         pageId: "3",
+//         contentPeek: [
+//           "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Error distinctio ex necessitatibus officia non assumenda molestiae, magni eius. Sed ullam autem animi officia vitae omnis, eligendi fugiat possimus cupiditate laudantium.",
+//         ],
+//         title: "Random Page in it",
+//       },
+//     ],
+//     title: "Random Note",
+//   },
+// ];
 
 const fakeRecapData: RecapCardProps[] = [
   {
@@ -81,12 +82,17 @@ const fakeRecapData: RecapCardProps[] = [
 ];
 
 export default function Home() {
+  const { data: notebooks, isLoading, error } = useGetNotebookForUserQuery();
+
+  if (isLoading) return <>Loading</>;
+  if (error || !notebooks) return <>{JSON.stringify(error)}</>;
+
   return (
     <section className="flex flex-col gap-6 mx-28 mt-28">
       <Sidebar />
       <UserGreeting />
       <RecapCardsContainer recaps={fakeRecapData} />
-      <NotebooksCardsContainer notebooks={fakeData} />
+      <NotebooksCardsContainer notebooks={notebooks} />
     </section>
   );
 }
