@@ -42,7 +42,21 @@ const notebookApiSlice = apiSlice.injectEndpoints({
         return transformNotebookApiResponseToNoteBookCards(res);
       },
     }),
+
+    createNotebook: builder.mutation<
+      { success: boolean; data: Notebook },
+      { title: string }
+    >({
+      query: (req) => ({
+        url: `${NOTEBOOKS_URL}/`,
+        method: "POST",
+        body: {
+          title: req.title,
+        },
+      }),
+    }),
   }),
 });
 
-export const { useGetNotebookForUserQuery } = notebookApiSlice;
+export const { useGetNotebookForUserQuery, useCreateNotebookMutation } =
+  notebookApiSlice;
