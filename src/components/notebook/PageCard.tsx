@@ -14,13 +14,13 @@ const PageCard: FC<PageCardProps> = ({
 }) => {
   return (
     <div
-      className="flex flex-shrink-0 flex-col xl:gap-5 xl:w-64 xl:h-64 xl:shadow-lg xl:p-3 xl:rounded-md border cursor-pointer"
+      className="flex flex-shrink-0 flex-col xl:gap-5 xl:w-64 xl:h-64 xl:shadow-md xl:p-3 xl:rounded-md border cursor-pointer"
       onClick={onClick}
     >
       <p className="xl:text-2xl">{title}</p>
       <div className="flex flex-col xl:gap-4">
         {contentPeek.map((content) => (
-          <p key={content} className="xl:text-sm">
+          <p key={content} className="xl:text-sm break-words">
             {content}
           </p>
         ))}

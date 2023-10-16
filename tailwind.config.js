@@ -6,6 +6,7 @@ export default {
         primary: "#50C878",
         secondary: "#ffffff",
         accent: "#2F27CE",
+        sgray: "#aeaeae",
       },
       fontFamily: {
         sans: ["Poppins", "sans-serif"],
