@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { NotebookCardsProps } from "src/components/notebook/NotebookCards";
 import { apiSlice } from "./apiSlice";
-import { PageCardProps } from "src/components/notebook/PageCard";
 import { transformNotebookApiResponse as transformNotebookApiResponseToNoteBookCards } from "./apiUtils";
 
 const NOTEBOOKS_URL = "/api/notebooks/";
@@ -43,6 +42,12 @@ const notebookApiSlice = apiSlice.injectEndpoints({
       },
     }),
 
+    getNotebookById: builder.query<Notebook, string>({
+      query: (notebookId) => `${NOTEBOOKS_URL}/${notebookId}`,
+      transformResponse: (response: { data: Notebook }): Notebook =>
+        response.data,
+    }),
+
     createNotebook: builder.mutation<
       { success: boolean; data: Notebook },
       { title: string }
@@ -58,5 +63,8 @@ const notebookApiSlice = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useGetNotebookForUserQuery, useCreateNotebookMutation } =
-  notebookApiSlice;
+export const {
+  useGetNotebookForUserQuery,
+  useCreateNotebookMutation,
+  useGetNotebookByIdQuery,
+} = notebookApiSlice;
