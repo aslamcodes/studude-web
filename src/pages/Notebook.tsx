@@ -16,6 +16,8 @@ export default function NotebookPage() {
   const { data: notebook, isLoading } = useGetNotebookByIdQuery(id as string);
 
   if (isLoading) return <>Loading</>;
+  console.log(notebook);
+  if (!notebook) return <>Error</>;
 
   return (
     <main className="mx-28 mt-28">
@@ -23,7 +25,7 @@ export default function NotebookPage() {
         <h1 className="text-4xl font-bold text-primary">{notebook?.title}</h1>
         <p className="text-gray-400">A Javascript Framework</p>
       </div>
-      <div className="mt-10 flex justify-center">
+      <div className="mt-10 flex justify-between gap-10">
         <div className="">
           <StududeHeading title="Pages" />
           <div className="flex flex-wrap gap-3 mt-3">
@@ -38,7 +40,7 @@ export default function NotebookPage() {
                 ]}
               />
             ))}
-            <CreatePageCard />
+            <CreatePageCard notebookId={notebook?._id} />
           </div>
         </div>
         <div>
@@ -55,7 +57,7 @@ export default function NotebookPage() {
               isRevised
               lastRevisited={new Date()}
               notebookId="12312"
-              recapTitle="Hey Ther"
+              recapTitle="Hey There"
             />
           ))}
         </div>

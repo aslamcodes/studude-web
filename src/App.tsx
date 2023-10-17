@@ -8,7 +8,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 const router = createBrowserRouter([
   { path: "/", element: <Home /> },
   {
-    path: "/notebook/:id/page/:id",
+    path: "/notebook/:notebookId/page/:pageId",
     element: <Page />,
   },
   {

@@ -1,18 +1,23 @@
-import { FC, useState } from "react";
+import React, { FC, useState } from "react";
 import Modal from "../common/Modal";
 import { ModalProps } from "./model.types";
 import Button from "../common/Button";
-import { useCreateNotebookMutation } from "src/slices/notebookApiSlice";
 import { useNavigate } from "react-router-dom";
+import { useCreateNotebookPageByIdMutation } from "src/slices/notebookPageApiSlice";
 
-const NewNotebookModal: FC<ModalProps> = ({ toggle, isShowing }) => {
-  const [trigger, { data: response }] = useCreateNotebookMutation();
+const CreatePageModal: FC<ModalProps & { notebookId: string }> = ({
+  toggle,
+  isShowing,
+  notebookId,
+}) => {
+  const [trigger, { data: response }] = useCreateNotebookPageByIdMutation();
   const [noteBookTitle, setNoteBookTitle] = useState("");
   const navigate = useNavigate();
 
-  if (response?.data) {
-    navigate(`/notebook/${response.data._id}`);
+  if (response?.success) {
+    navigate(`/notebook/${response.page._id}`);
   }
+
   return (
     <Modal hide={toggle} isShowing={isShowing}>
       <div className="p-6 w-2/6 bg-white rounded-lg flex flex-col gap-12">
@@ -31,7 +36,7 @@ const NewNotebookModal: FC<ModalProps> = ({ toggle, isShowing }) => {
           title="Create!"
           className="self-end"
           onClick={() => {
-            trigger({ title: noteBookTitle });
+            trigger({ title: noteBookTitle, notebookId });
           }}
         />
       </div>
@@ -39,4 +44,4 @@ const NewNotebookModal: FC<ModalProps> = ({ toggle, isShowing }) => {
   );
 };
 
-export default NewNotebookModal;
+export default CreatePageModal;

@@ -14,6 +14,7 @@ import NewNotebookModal from "../modals/NewNotebookModal";
 export const Sidebar = () => {
   const [isSidebarActive, setIsSidebarActive] = useState(false);
   const [isNewNotebookModalShowing, toggle] = useModal();
+
   return isSidebarActive ? (
     <div
       className="fixed top-0 left-0 w-full h-screen"
