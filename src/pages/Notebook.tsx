@@ -29,7 +29,7 @@ export default function NotebookPage() {
         <div className="">
           <StududeHeading title="Pages" />
           <div className="flex flex-wrap gap-3 mt-3">
-            {notebook?.page.map((page) => (
+            {notebook?.pages.map((page) => (
               <PageCard
                 key={page._id}
                 pageId={page._id}
