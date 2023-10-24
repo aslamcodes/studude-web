@@ -1,5 +1,5 @@
 import { NotebookCardsProps } from "src/components/notebook/NotebookCards";
-import { NotebookPreviewRes, PageApiRes } from "./notebookApiSlice";
+import { NotebookPreviewRes, PageFromServer } from "./notebookApiSlice";
 import { PageCardProps } from "src/components/notebook/PageCard";
 
 export const transformNotebookApiResponse = (
@@ -12,7 +12,7 @@ export const transformNotebookApiResponse = (
   }));
 };
 
-const transformPageApiResponse = (pages: PageApiRes[]): PageCardProps[] => {
+const transformPageApiResponse = (pages: PageFromServer[]): PageCardProps[] => {
   return pages.map((page) => ({
     title: page.title,
     contentPeek: page.contents.map((content) => content.data),

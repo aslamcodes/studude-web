@@ -7,14 +7,13 @@ import {
 export interface RecapCardProps {
   recapTitle: string;
   lastRevisited: Date;
-  notebookId: string;
+  notebookId?: string;
   isRevised: boolean;
 }
 
 const RecapCard: FC<RecapCardProps> = ({
   recapTitle,
   lastRevisited,
-  notebookId,
   isRevised,
 }) => {
   return (
@@ -33,7 +32,7 @@ const RecapCard: FC<RecapCardProps> = ({
           Last Revised{" "}
           {new Date().getDay() === lastRevisited.getDay()
             ? "Today"
-            : lastRevisited.getDay()}
+            : `${lastRevisited.getUTCDay()}/${lastRevisited.getUTCMonth()}/${lastRevisited.getUTCFullYear()}`}
         </p>
       </div>
       {isRevised ? (

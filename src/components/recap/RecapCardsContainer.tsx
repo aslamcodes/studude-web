@@ -1,22 +1,24 @@
 import React, { FC } from "react";
 import StududeHeading from "../common/StududeHeading";
-import RecapCard, { RecapCardProps } from "./RecapCard";
+import RecapCard from "./RecapCard";
+import { useGetRecapForUserQuery } from "src/slices/recapApiSlice";
 
-export interface RecapCardContainer {
-  recaps: RecapCardProps[];
-}
+const RecapCardsContainer: FC = () => {
+  const { data: recaps, isLoading, error } = useGetRecapForUserQuery({});
 
-const RecapCardsContainer: FC<RecapCardContainer> = ({ recaps }) => {
+  if (isLoading) return <>Loading</>;
+  if (error) return <>{JSON.stringify(error)}</>;
+
   return (
     <div className="flex flex-col gap-4 ">
       <StududeHeading title="Today's Recap" />
       <div className="flex gap-10 gap-y-4 flex-wrap">
-        {recaps.map((recap) => (
+        {recaps?.data.map((recap) => (
           <RecapCard
-            key={recap.notebookId}
-            notebookId={recap.notebookId}
-            recapTitle={recap.recapTitle}
-            lastRevisited={recap.lastRevisited}
+            key={recap._id}
+            notebookId={recap.notebook}
+            recapTitle={recap.page.title}
+            lastRevisited={new Date(recap.nextRepetition)}
             isRevised={recap.isRevised}
           />
         ))}

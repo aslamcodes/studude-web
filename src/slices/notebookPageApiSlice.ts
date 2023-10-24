@@ -1,12 +1,12 @@
 import { apiSlice } from "./apiSlice";
-import { PageApiRes } from "./notebookApiSlice";
+import { PageFromServer } from "./notebookApiSlice";
 
 const NOTEBOOK_PAGE_URL = "/api/notebooks";
 
 const notebookPageApiSlice = apiSlice.injectEndpoints({
   endpoints: (build) => ({
     createNotebookPageById: build.mutation<
-      { success: boolean; page: PageApiRes },
+      { success: boolean; page: PageFromServer },
       { title: string; notebookId: string }
     >({
       query: (req) => {

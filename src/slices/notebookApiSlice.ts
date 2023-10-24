@@ -10,27 +10,25 @@ interface baseApiResponse {
   data: unknown[];
 }
 
-interface ContentApiRes {
-  data: string;
-  format: "h1" | "h2" | "h3";
-}
-
-export interface PageApiRes {
-  contents: ContentApiRes[]; // You might want to replace `any[]` with a more specific type if possible
+export interface PageFromServer {
+  contents: {
+    data: string;
+    format: "h1" | "h2" | "h3";
+  }[];
+  notebook: string;
   _id: string;
-  title: string; // This field seems to be optional based on your data
+  title: string;
 }
 
-interface Notebook {
+export interface NotebookFromServer {
   _id: string;
   title: string;
   user: string;
-  pages: PageApiRes[];
-  __v: number;
+  pages: PageFromServer[];
 }
 
 export interface NotebookPreviewRes extends baseApiResponse {
-  data: Notebook[];
+  data: NotebookFromServer[];
 }
 
 const notebookApiSlice = apiSlice.injectEndpoints({
@@ -42,14 +40,15 @@ const notebookApiSlice = apiSlice.injectEndpoints({
       },
     }),
 
-    getNotebookById: builder.query<Notebook, string>({
+    getNotebookById: builder.query<NotebookFromServer, string>({
       query: (notebookId) => `${NOTEBOOKS_URL}/${notebookId}`,
-      transformResponse: (response: { data: Notebook }): Notebook =>
-        response.data,
+      transformResponse: (response: {
+        data: NotebookFromServer;
+      }): NotebookFromServer => response.data,
     }),
 
     createNotebook: builder.mutation<
-      { success: boolean; data: Notebook },
+      { success: boolean; data: NotebookFromServer },
       { title: string }
     >({
       query: (req) => ({
