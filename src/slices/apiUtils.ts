@@ -8,13 +8,13 @@ export const transformNotebookApiResponse = (
   return apiResponse.data.map((notebook) => ({
     title: notebook.title,
     notebookId: notebook._id,
-    pageCards: transformPageApiResponse(notebook.page),
+    pageCards: transformPageApiResponse(notebook.pages),
   }));
 };
 
 const transformPageApiResponse = (pages: PageApiRes[]): PageCardProps[] => {
   return pages.map((page) => ({
-    title: page.title || "", // Handle the case where title is optional
+    title: page.title,
     contentPeek: page.contents.map((content) => content.data),
     pageId: page._id,
   }));

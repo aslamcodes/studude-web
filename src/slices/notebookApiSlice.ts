@@ -18,14 +18,14 @@ interface ContentApiRes {
 export interface PageApiRes {
   contents: ContentApiRes[]; // You might want to replace `any[]` with a more specific type if possible
   _id: string;
-  title?: string; // This field seems to be optional based on your data
+  title: string; // This field seems to be optional based on your data
 }
 
 interface Notebook {
   _id: string;
   title: string;
   user: string;
-  page: PageApiRes[];
+  pages: PageApiRes[];
   __v: number;
 }
 
