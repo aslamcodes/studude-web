@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from "react";
 import { useLoginMutation } from "src/slices/userApiSlice";
 import { useDispatch } from "react-redux";

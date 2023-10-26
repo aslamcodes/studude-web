@@ -4,6 +4,8 @@ import Page from "src/pages/Page";
 import Login from "src/pages/Login";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { useEffect } from "react";
+import { io } from "socket.io-client";
 
 const router = createBrowserRouter([
   { path: "/", element: <Home /> },
@@ -22,16 +24,15 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return (
-    <RouterProvider router={router}>
-      {/* <Router>
-        <Route path="/" component={Home} />
-        <Route path="/notebook/id" component={NotebookPage} />
-        <Route path="/notebook/page/id" component={Page} />
-        <Route path="/login" component={Login} />
-      </Router> */}
-    </RouterProvider>
-  );
+  useEffect(() => {
+    const socket = io("http://localhost:8000");
+
+    socket.on("reminder", () => {
+      alert("Study Bro!");
+    });
+  }, []);
+
+  return <RouterProvider router={router} />;
 }
 
 export default App;
